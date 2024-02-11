@@ -13,6 +13,10 @@
 
 #define VERSION 0.01
 
+// size of window
+#define SIZE_ENTRY_WINDOW_X 400
+#define SIZE_ENTRY_WINDOW_Y 250
+
 enum
 {
     ID_CHANGE_RECORD_PASSWORD_FRAME = 1,
@@ -24,7 +28,7 @@ enum
 class EntryMenu : public wxFrame
 {
 public:
-    EntryMenu();
+    EntryMenu(const wxPoint& position);
 
 private:
     // event handlers

@@ -46,7 +46,7 @@
 class RecordPassword : public wxFrame
 {
 public:
-    RecordPassword();
+    RecordPassword(const wxPoint& position);
 
 private:
     // event handlers

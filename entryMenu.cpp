@@ -11,9 +11,9 @@
 #include "decrypt.hpp"
 
 // constructor
-EntryMenu::EntryMenu()
+EntryMenu::EntryMenu(const wxPoint& position)
     // there are size and style params here that can be passed to the wxFrame constructor
-    : wxFrame(nullptr, wxID_ANY, "Password Manager")
+    : wxFrame(nullptr, wxID_ANY, "Password Manager", position, wxSize(SIZE_ENTRY_WINDOW_X, SIZE_ENTRY_WINDOW_Y))
 {
 
     // main title of application
@@ -76,14 +76,16 @@ void EntryMenu::OnOpen(wxCommandEvent& event)
 }
 
 void EntryMenu::ChangeToRecordPassword(wxCommandEvent& event) {
-    RecordPassword* recordPasswordFrame = new RecordPassword();
+    wxPoint currentPos = GetPosition();
+    RecordPassword* recordPasswordFrame = new RecordPassword(currentPos);
     recordPasswordFrame->Show(true);
     // Close the entry menu frame
     this->Close();
 }
 
 void EntryMenu::ChangeToDecryptFile(wxCommandEvent& event) {
-    Decrypt* decryptFrame = new Decrypt();
+    wxPoint currentPos = GetPosition();
+    Decrypt* decryptFrame = new Decrypt(currentPos);
     decryptFrame->Show(true);
     // Close the entry menu frame
     this->Close();

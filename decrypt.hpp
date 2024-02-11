@@ -17,7 +17,7 @@
 class Decrypt : public wxFrame
 {
 public:
-    Decrypt();
+    Decrypt(const wxPoint& position);
 
 private:
     // event handlers

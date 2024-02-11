@@ -10,9 +10,9 @@
 #include "entryMenu.hpp"
 
 // constructor
-RecordPassword::RecordPassword()
+RecordPassword::RecordPassword(const wxPoint& position)
     // there are size and style params here that can be passed to the wxFrame constructor
-    : wxFrame(nullptr, wxID_ANY, "Record Password", wxPoint(POS_WINDOW_X,POS_WINDOW_Y), wxSize(SIZE_WINDOW_X,SIZE_WINDOW_Y))
+    : wxFrame(nullptr, wxID_ANY, "Record Password", position, wxSize(SIZE_WINDOW_X,SIZE_WINDOW_Y))
 {
 
     wxMenu *menuFile = new wxMenu;
@@ -64,8 +64,9 @@ RecordPassword::RecordPassword()
 }
 
 void RecordPassword::OnBackButtonClick(wxCommandEvent& event) {
+    wxPoint currentPos = GetPosition();
     // Open the entry menu frame
-    EntryMenu* entryMenu = new EntryMenu();
+    EntryMenu* entryMenu = new EntryMenu(currentPos);
     entryMenu->Show(true);
     // Close the record password frame
     this->Close();

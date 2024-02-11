@@ -10,7 +10,11 @@
 #include <wx/wx.h>
 #include "entryMenu.hpp"
 
-// declare app entry point
+//start positions for application
+#define POS_WINDOW_X 100
+#define POS_WINDOW_Y 100
+
+// app entry point
 class PasswordManager : public wxApp
 {
 public:
@@ -23,7 +27,7 @@ public:
 // all windows MUST not be deleted by the application
 bool PasswordManager::OnInit()
 {
-    EntryMenu *frame = new EntryMenu();
+    EntryMenu *frame = new EntryMenu(wxPoint(POS_WINDOW_X, POS_WINDOW_Y));
     frame->Show(true);
     return true;
 }

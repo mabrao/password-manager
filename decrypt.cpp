@@ -10,9 +10,9 @@
 #include "entryMenu.hpp"
 
 // constructor
-Decrypt::Decrypt()
+Decrypt::Decrypt(const wxPoint& position)
     // there are size and style params here that can be passed to the wxFrame constructor
-    : wxFrame(nullptr, wxID_ANY, "Decrypt")
+    : wxFrame(nullptr, wxID_ANY, "Decrypt", position, wxSize(500, 400))
 {
 
     // Create a panel
@@ -27,8 +27,9 @@ Decrypt::Decrypt()
 }
 
 void Decrypt::OnBackButtonClick(wxCommandEvent& event) {
+    wxPoint currentPos = GetPosition();
     // Open the entry menu frame
-    EntryMenu* entryMenu = new EntryMenu();
+    EntryMenu* entryMenu = new EntryMenu(currentPos);
     entryMenu->Show(true);
     // Close the decrypt frame
     this->Close();
