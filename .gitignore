@@ -1,2 +1,4 @@
 /wx
 *.o
+/passwordStorage
+passwordManager
