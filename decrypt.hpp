@@ -21,6 +21,11 @@ public:
 
 private:
     // event handlers
+    // void OnNew(wxCommandEvent& event);
+    // void OnOpen(wxCommandEvent& event);
+    // void OnExit(wxCommandEvent& event);
+    // void OnAbout(wxCommandEvent& event);
+
     void OnBackButtonClick(wxCommandEvent& event);
 };
 

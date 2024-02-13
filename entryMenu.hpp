@@ -30,13 +30,15 @@ class EntryMenu : public wxFrame
 public:
     EntryMenu(const wxPoint& position);
 
-private:
-    // event handlers
+    // public event handlers
     void OnNew(wxCommandEvent& event);
     void OnOpen(wxCommandEvent& event);
     void OnExit(wxCommandEvent& event);
     void OnAbout(wxCommandEvent& event);
 
+private:
+
+    // private event handlers
     void ChangeToRecordPassword(wxCommandEvent& event);
     void ChangeToDecryptFile(wxCommandEvent& event);
 };

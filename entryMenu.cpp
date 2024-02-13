@@ -34,7 +34,7 @@ EntryMenu::EntryMenu(const wxPoint& position)
     menuBar->Append(menuHelp, "&Help");
 
     SetMenuBar( menuBar );
-
+    
     // Create a panel
     wxPanel* panel = new wxPanel(this, wxID_ANY);
 
