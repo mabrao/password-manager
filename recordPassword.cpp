@@ -183,7 +183,7 @@ void RecordPassword::WriteToFile(std::string filename) {
         fieldsToWrite = insertAtPositions(fileWritePos, numEntries, fields);
     }
 
-    std::cout << "\nPassword decrypted = "<< Encrypt::decryptString(fields[eEncryptionLevel], fields[ePassword]) << "\n" << std::endl;
+    std::cout << "\nPassword decrypted = "<< Encrypt::encryptString(fields[eEncryptionLevel], fields[ePassword], true) << "\n" << std::endl;
 
     // Write to file
     std::cout << newEntry << std::endl;

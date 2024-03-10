@@ -45,31 +45,12 @@ public:
     }
 
 
-    static std::string encryptString(const std::string str_level, std::string& string) {
+    static std::string encryptString(const std::string str_level, std::string& string, bool decrypt = false) {
         EncryptionLevel level = getLevelFromStr(str_level);
         std::string result = "";
         switch (level) {
             case eLevel1:
-                return caesarCipher(string, 5);
-            case eLevel2:
-                return "";
-            case eLevel3:
-                return "";
-            case eLevel4:
-                return "";
-            case eLevel5:
-                return "";
-            default:
-                return "";
-        }
-    }
-
-    static std::string decryptString(const std::string str_level, std::string& string) {
-        EncryptionLevel level = getLevelFromStr(str_level);
-        std::string result = "";
-        switch (level) {
-            case eLevel1:
-                return caesarCipher(string, 5, true);
+                return caesarCipher(string, 5, decrypt);
             case eLevel2:
                 return "";
             case eLevel3:
