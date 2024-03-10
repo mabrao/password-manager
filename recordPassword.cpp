@@ -8,6 +8,7 @@
 
 #include "recordPassword.hpp"
 #include "entryMenu.hpp"
+#include "encrypt.hpp"
 
 // constructor
 RecordPassword::RecordPassword(const wxPoint& position)
@@ -174,11 +175,15 @@ void RecordPassword::WriteToFile(std::string filename) {
     }
 
     std::string fieldsToWrite;
+    std::string encrypted_password = Encrypt::encryptString(fields[eEncryptionLevel], fields[ePassword]);
+    fields[ePassword] = encrypted_password;
     if (isFileWritePosZero) {
         fieldsToWrite = "          " + fields[ePasswordTitle] + "          " + fields[ePassword] + "          " + fields[eEncryptionLevel] + "          " + fields[eFileName] + "          ";
     } else {
         fieldsToWrite = insertAtPositions(fileWritePos, numEntries, fields);
     }
+
+    std::cout << "\nPassword decrypted = "<< Encrypt::decryptString(fields[eEncryptionLevel], fields[ePassword]) << "\n" << std::endl;
 
     // Write to file
     std::cout << newEntry << std::endl;
