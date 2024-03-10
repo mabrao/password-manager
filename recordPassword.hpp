@@ -57,7 +57,8 @@ enum EntryType {
     ePasswordTitle,
     ePassword,
     eEncryptionLevel,
-    eFileName
+    eFileName,
+    eMaxEntry,
 };
 
 class RecordPassword : public wxFrame
@@ -73,9 +74,6 @@ private:
 
     // writes recorded fields to a file
     void WriteToFile(std::string filename);
-
-    // does file exist
-    bool isFile(char* filepath);
 
     // remove \n
     void removeNewlines(std::string& str);
@@ -96,6 +94,57 @@ private:
         // Extract the substring without leading and trailing newlines
         return str.substr(left, right - left + 1);
     }
+
+    std::string insertAtPositions(int positions[], int size, std::map<EntryType, std::string> fields) {
+        std::string finalStr = "";
+        int lastPosition = 0;
+        if (size > 0) {
+            lastPosition = positions[size - 1];
+        }
+
+        int which_field = 0;
+        EntryType entry;
+        bool wrote;
+        int i = 0;
+        while (i <= lastPosition) {
+            wrote = false;
+            entry = getEntryType(which_field);
+
+            // iterate over our positions and check if our i is there
+            int j = 0;
+            while (j < size) {
+                if (i == positions[j]) {
+                    finalStr += fields[entry];
+                    i += fields[entry].size();
+                    if (which_field < eMaxEntry) {
+                        which_field++;
+                        wrote = true;
+                        break;
+                    }
+                }
+                j++;
+            }
+            if (wrote == false) {
+                finalStr += " ";
+                i++;
+            }
+        }
+
+        return finalStr;
+    }
+
+    EntryType getEntryType(int value) {
+        switch (value) {
+            case 0: return ePasswordTitle;
+            case 1: return ePassword;
+            case 2: return eEncryptionLevel;
+            case 3: return eFileName;
+            case 4: return eMaxEntry;
+            default:
+                throw std::invalid_argument("Invalid entry type");
+        }
+}
+
 
     // text box titles
     wxStaticText* passwordTitle;;
@@ -125,7 +174,7 @@ private:
 
     std::map<EntryType, std::string> fields;
 
-    uint8_t fileWritePos[MAX_NUM_ENTRIES] = {0};
+    int fileWritePos[MAX_NUM_ENTRIES] = {0};
 
     const char* passwordDirPath = "passwordStorage/";
 
