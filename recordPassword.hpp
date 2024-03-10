@@ -16,6 +16,7 @@
 #include <sys/stat.h>
 #include <unistd.h>
 #include <string>
+#include <algorithm>
 
 // macros with position and size for UI elements
 
@@ -71,10 +72,30 @@ private:
     void CacheFields(wxCommandEvent& event);
 
     // writes recorded fields to a file
-    void WriteToFile();
+    void WriteToFile(std::string filename);
 
     // does file exist
     bool isFile(char* filepath);
+
+    // remove \n
+    void removeNewlines(std::string& str);
+
+    template <typename T> 
+    std::string stripNewlines(T str) {
+        // Find the first non-newline character from the left
+        size_t left = str.find_first_not_of('\n');
+
+        // If the string is empty or contains only newlines, return an empty string
+        if (left == std::string::npos) {
+            return "";
+        }
+
+        // Find the last non-newline character from the right
+        size_t right = str.find_last_not_of('\n');
+
+        // Extract the substring without leading and trailing newlines
+        return str.substr(left, right - left + 1);
+    }
 
     // text box titles
     wxStaticText* passwordTitle;;
@@ -104,7 +125,7 @@ private:
 
     std::map<EntryType, std::string> fields;
 
-    uint8_t fileWritePos[MAX_NUM_ENTRIES];
+    uint8_t fileWritePos[MAX_NUM_ENTRIES] = {0};
 
     const char* passwordDirPath = "passwordStorage/";
 
